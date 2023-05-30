@@ -26,7 +26,8 @@ public class chitiet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("X-Content-Type-Options", "nosniff");
+		//response.setContentType("text/html;charset=UTF-8");
 		String id = request.getParameter("id");
 		DAO dao = new DAO();
 		int idsp = Integer.parseInt(id);
