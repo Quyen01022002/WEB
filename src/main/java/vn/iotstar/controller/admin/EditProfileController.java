@@ -31,6 +31,7 @@ public class EditProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setHeader("X-Content-Type-Options", "nosniff");
 		HttpSession session = req.getSession();
 		int idAdmin = 0;
 		try {
@@ -53,6 +54,7 @@ public class EditProfileController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setHeader("X-Content-Type-Options", "nosniff");
 		UserDAO userDao= new UserDAO();
 		UserModels user=new UserModels();
 		HttpSession session = req.getSession();

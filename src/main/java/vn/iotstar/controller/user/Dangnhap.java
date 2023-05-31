@@ -21,7 +21,7 @@ import util.MaHoa;
 public class Dangnhap extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setHeader("X-Content-Type-Options", "nosniff");
 		request.getRequestDispatcher("/view/user/dangnhap.jsp").forward(request, response);
 		
 		
@@ -29,7 +29,7 @@ public class Dangnhap extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setHeader("X-Content-Type-Options", "nosniff");
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		String user=request.getParameter("user");

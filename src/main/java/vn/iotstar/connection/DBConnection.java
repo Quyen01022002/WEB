@@ -1,36 +1,31 @@
 package vn.iotstar.connection;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 public class DBConnection {
-	private final String serverName = "LAPTOP-OHDAKCI8";
-	private final String dbName = "SHOPFRUIT";
-	private final String portNumber = "1433";
-	private final String instance = "";
-	private final String userID = "sa";
-	private final String password = "";
+	
+	private final String configFile = "C:\\Users\\HP\\eclipse-workspace\\WEB\\src\\main\\java\\vn\\iotstar\\connection\\config.properties";
 
 	public Connection getConnection() throws Exception {
+		
+		Properties properties = new Properties();
+		properties.load(new FileInputStream(configFile));
+		
+		String serverName = properties.getProperty("serverName");
+		String dbName = properties.getProperty("dbName");
+		String portNumber = properties.getProperty("portNumber");
+		String instance = properties.getProperty("instance");
+		String userID = properties.getProperty("userID");
+		String password = properties.getProperty("password");
 		String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
 		if (instance == null || instance.trim().isEmpty())
 			url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		this.DBConnection();
 		return DriverManager.getConnection(url, userID, password);
 	}
-	
-	// Fix Do not hardcode passwords in code. Found password string
-	public DBConnection() {
-        	this.password = getPasswordFromConfig(); // Retrieve password from configuration file or environment variable
-    	}
-
-	private String getPasswordFromConfig() {
-        	// Implement logic to retrieve the password from a configuration file or environment variable
-        	// Return the password securely
-        	return "123456@a";
-    	}
-	
 	public static void main(String[] args) {
 		try {
 			System.out.println(new DBConnection().getConnection());

@@ -23,7 +23,7 @@ import util.MaHoa;
 @WebServlet("/admin/profile-changePw")
 public class ChangePasswordController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 
+		resp.setHeader("X-Content-Type-Options", "nosniff");
 		HttpSession session = req.getSession();
 		int idAdmin = 0;
 		try {
